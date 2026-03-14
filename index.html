@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高校周边餐饮地图 Demo</title>
+  <meta
+    name="description"
+    content="一个无需额外依赖即可直接打开运行的高校周边餐饮地图 Web App Demo。"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="top-search">
+      <label class="search-box" for="searchInput">
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M11 4.5a6.5 6.5 0 1 0 0 13a6.5 6.5 0 0 0 0-13Z" />
+            <path d="m16 16 4 4" />
+          </svg>
+        </span>
+        <input id="searchInput" type="search" placeholder="搜索大学城的店名..." autocomplete="off">
+      </label>
+      <div class="search-results hidden" id="searchResults"></div>
+    </header>
+
+    <aside class="category-rail" id="categoryRail" aria-label="菜系分类"></aside>
+
+    <aside class="top-tools">
+      <button class="back-button" id="backButton" type="button">返回总地图</button>
+      <div class="zoom-card">
+        <button class="zoom-button" id="zoomOutButton" type="button" aria-label="缩小">-</button>
+        <button class="zoom-button" id="zoomInButton" type="button" aria-label="放大">+</button>
+      </div>
+      <a class="doc-link" href="docs/product-design.md">产品文档</a>
+    </aside>
+
+    <aside class="service-rail" id="serviceRail" aria-label="扩展服务"></aside>
+
+    <main class="map-stage" id="mapStage">
+      <div class="map-camera" id="mapCamera">
+        <div class="map-scene" id="mapScene">
+          <div class="map-surface">
+            <svg class="map-illustration" viewBox="0 0 1000 620" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <g id="map-pine">
+                  <rect x="-4" y="0" width="8" height="13" fill="#6b4020"/>
+                  <polygon points="0,-36 -16,0 16,0" fill="#2c6a1e"/>
+                  <polygon points="0,-50 -13,-18 13,-18" fill="#3b7a2c"/>
+                  <polygon points="0,-62 -9,-36 9,-36" fill="#4a8a3a"/>
+                </g>
+                <g id="map-pine-sm">
+                  <rect x="-3" y="0" width="6" height="10" fill="#6b4020"/>
+                  <polygon points="0,-27 -12,0 12,0" fill="#2c6a1e"/>
+                  <polygon points="0,-38 -10,-14 10,-14" fill="#3b7a2c"/>
+                  <polygon points="0,-47 -7,-28 7,-28" fill="#4a8a3a"/>
+                </g>
+                <g id="map-house">
+                  <rect x="-17" y="-23" width="34" height="25" fill="#f4efe5" stroke="#9e8a6a" stroke-width="1.5"/>
+                  <polygon points="-19,-23 0,-42 19,-23" fill="#cc3838" stroke="#992828" stroke-width="1.5"/>
+                  <rect x="-6" y="-17" width="12" height="17" rx="1" fill="#6e9ec0"/>
+                  <rect x="5" y="-46" width="5" height="9" fill="#b87848"/>
+                </g>
+                <g id="map-house-sm">
+                  <rect x="-14" y="-19" width="28" height="21" fill="#f0ebe0" stroke="#9e8a6a" stroke-width="1.5"/>
+                  <polygon points="-16,-19 0,-34 16,-19" fill="#c03030" stroke="#902020" stroke-width="1.5"/>
+                  <rect x="-5" y="-13" width="10" height="13" rx="1" fill="#6e9ec0"/>
+                </g>
+              </defs>
+
+              <!-- Ocean -->
+              <rect width="1000" height="620" fill="#96cde2"/>
+              <path d="M0,568 Q125,556 250,568 T500,568 T750,568 T1000,568" fill="none" stroke="white" stroke-width="1.8" opacity="0.35"/>
+              <path d="M0,592 Q125,580 250,592 T500,592 T750,592 T1000,592" fill="none" stroke="white" stroke-width="1.4" opacity="0.28"/>
+              <g fill="white" opacity="0.2">
+                <ellipse cx="52" cy="200" rx="20" ry="5" transform="rotate(-12 52 200)"/>
+                <ellipse cx="946" cy="340" rx="16" ry="4" transform="rotate(10 946 340)"/>
+                <ellipse cx="70" cy="445" rx="14" ry="3.5" transform="rotate(-8 70 445)"/>
+                <ellipse cx="958" cy="180" rx="18" ry="4.5" transform="rotate(14 958 180)"/>
+              </g>
+
+              <!-- Land mass -->
+              <path d="M62,574 C28,561 10,524 10,475 C10,426 32,384 62,349 C82,319 108,297 136,279 C162,259 192,247 224,241 C258,235 288,239 318,244 C342,249 362,257 388,251 C418,243 450,227 490,219 C530,211 568,214 608,209 C648,203 685,194 722,189 C760,183 796,185 832,195 C872,207 906,227 932,257 C958,287 972,325 976,367 C980,409 970,449 950,483 C928,519 896,544 858,561 C820,577 776,585 728,589 C672,594 604,597 532,595 C452,593 366,588 286,581 C200,573 120,573 62,574 Z" fill="#6ab558" stroke="#3a6a28" stroke-width="3.5"/>
+              <path d="M110,547 C82,531 72,497 80,459 C88,421 110,389 138,363 C162,339 190,324 224,317 C260,309 294,315 328,321 C358,327 384,337 414,329 C448,319 485,303 528,296 C572,289 614,291 658,285 C700,279 738,271 774,275 C814,279 850,297 878,321 C904,343 920,374 926,409 C932,443 924,479 906,509 C886,539 856,559 820,571 C782,583 738,588 692,590 C638,592 570,592 500,589 C422,585 340,577 265,567 C190,557 130,555 110,547 Z" fill="#7bc868" opacity="0.4"/>
+
+              <!-- River -->
+              <path d="M728,191 C708,231 678,257 646,281 C610,307 572,323 540,347 C504,373 474,401 455,435 C446,453 445,469 452,487" fill="none" stroke="#2888aa" stroke-width="22" stroke-linecap="round" opacity="0.3"/>
+              <path d="M728,191 C708,231 678,257 646,281 C610,307 572,323 540,347 C504,373 474,401 455,435 C446,453 445,469 452,487" fill="none" stroke="#48a8cc" stroke-width="16" stroke-linecap="round" opacity="0.92"/>
+              <path d="M728,191 C708,231 678,257 646,281 C610,307 572,323 540,347 C504,373 474,401 455,435 C446,453 445,469 452,487" fill="none" stroke="#7ecce0" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+
+              <!-- Roads -->
+              <path d="M100,580 C165,560 240,544 330,534 C420,523 510,519 600,523 C680,527 758,537 830,553 C878,564 924,573 960,579" fill="none" stroke="#deca80" stroke-width="14" stroke-linecap="round" opacity="0.88"/>
+              <path d="M318,580 C312,544 308,507 310,467 C312,427 324,387 340,351 C356,315 370,279 378,247" fill="none" stroke="#deca80" stroke-width="11" stroke-linecap="round" opacity="0.82"/>
+              <path d="M598,217 C606,259 612,305 612,351 C612,393 604,433 596,471 C590,499 582,529 580,559" fill="none" stroke="#deca80" stroke-width="10" stroke-linecap="round" opacity="0.82"/>
+
+              <!-- Mountains near A校区 (x=30%,y=42% → 300,260) -->
+              <polygon points="162,378 210,289 258,378" fill="#859e64" stroke="#4a6030" stroke-width="2.2"/>
+              <polygon points="228,378 296,247 364,378" fill="#8eaa68" stroke="#4a6030" stroke-width="2.5"/>
+              <polygon points="270,269 296,247 322,269" fill="#f0f0ee"/>
+              <polygon points="336,378 378,305 420,378" fill="#859e64" stroke="#4a6030" stroke-width="2.2"/>
+              <polygon points="358,317 378,305 398,317" fill="#f0f0ee"/>
+
+              <!-- Mountains near C校区 (x=74%,y=32% → 740,198) -->
+              <polygon points="630,247 668,173 706,247" fill="#859e64" stroke="#4a6030" stroke-width="2.2"/>
+              <polygon points="688,247 748,137 808,247" fill="#8eaa68" stroke="#4a6030" stroke-width="2.5"/>
+              <polygon points="722,159 748,137 774,159" fill="#f0f0ee"/>
+              <polygon points="788,247 824,181 860,247" fill="#859e64" stroke="#4a6030" stroke-width="2.2"/>
+              <polygon points="806,191 824,181 842,191" fill="#f0f0ee"/>
+
+              <!-- Pine trees — left coast -->
+              <use href="#map-pine" transform="translate(112,458)"/>
+              <use href="#map-pine" transform="translate(142,466)"/>
+              <use href="#map-pine-sm" transform="translate(168,463)"/>
+              <!-- Pine trees — centre -->
+              <use href="#map-pine-sm" transform="translate(476,404)"/>
+              <use href="#map-pine" transform="translate(502,399)"/>
+              <use href="#map-pine-sm" transform="translate(530,406)"/>
+              <!-- Pine trees — upper right -->
+              <use href="#map-pine-sm" transform="translate(856,349)"/>
+              <use href="#map-pine" transform="translate(883,343)"/>
+              <use href="#map-pine-sm" transform="translate(909,351)"/>
+              <!-- Scattered singles -->
+              <use href="#map-pine-sm" transform="translate(394,221)"/>
+              <use href="#map-pine-sm" transform="translate(182,331)"/>
+
+              <!-- Houses near A校区 -->
+              <use href="#map-house" transform="translate(298,456)"/>
+              <use href="#map-house-sm" transform="translate(340,459)"/>
+              <use href="#map-house-sm" transform="translate(268,461)"/>
+              <!-- Houses near B校区 (x=58%,y=48% → 580,298) -->
+              <use href="#map-house" transform="translate(574,479)"/>
+              <use href="#map-house-sm" transform="translate(614,483)"/>
+
+              <!-- Lighthouse near C校区 coast -->
+              <g transform="translate(878,179)">
+                <rect x="-14" y="0" width="28" height="6" fill="#c0b080" stroke="#908050" stroke-width="1" rx="1"/>
+                <rect x="-9" y="-88" width="18" height="90" rx="2" fill="#f2ede4" stroke="#888050" stroke-width="1.5"/>
+                <rect x="-9" y="-88" width="18" height="15" fill="#d83030" rx="2"/>
+                <rect x="-9" y="-58" width="18" height="14" fill="#d83030"/>
+                <rect x="-9" y="-28" width="18" height="14" fill="#d83030"/>
+                <rect x="-11" y="-105" width="22" height="19" rx="2" fill="#fff8c8" stroke="#888050" stroke-width="1.5"/>
+                <polygon points="-12,-105 0,-122 12,-105" fill="#b02828" stroke="#801818" stroke-width="1.5"/>
+                <circle cx="0" cy="-96" r="5" fill="#ffe840" opacity="0.95"/>
+                <rect x="-13" y="-108" width="26" height="4" rx="1" fill="#888050"/>
+                <rect x="-4" y="-28" width="9" height="28" rx="4" fill="#6898b8" stroke="#4878a0" stroke-width="1"/>
+              </g>
+
+              <!-- Small offshore islands -->
+              <ellipse cx="60" cy="370" rx="32" ry="20" fill="#6ab558" stroke="#3a6a28" stroke-width="2"/>
+              <ellipse cx="945" cy="247" rx="26" ry="16" fill="#6ab558" stroke="#3a6a28" stroke-width="2"/>
+
+              <!-- Subtle map grid -->
+              <g stroke="rgba(100,80,20,0.06)" stroke-width="1" fill="none">
+                <line x1="0" y1="124" x2="1000" y2="124"/>
+                <line x1="0" y1="248" x2="1000" y2="248"/>
+                <line x1="0" y1="372" x2="1000" y2="372"/>
+                <line x1="0" y1="496" x2="1000" y2="496"/>
+                <line x1="142" y1="0" x2="142" y2="620"/>
+                <line x1="284" y1="0" x2="284" y2="620"/>
+                <line x1="426" y1="0" x2="426" y2="620"/>
+                <line x1="568" y1="0" x2="568" y2="620"/>
+                <line x1="710" y1="0" x2="710" y2="620"/>
+                <line x1="852" y1="0" x2="852" y2="620"/>
+              </g>
+            </svg>
+            <div class="map-layer" id="schoolLayer"></div>
+            <div class="map-layer" id="shopLayer"></div>
+            <div class="map-watermark" aria-hidden="true">大学城区域</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-compass" aria-hidden="true">
+        <span class="compass-n">N</span>
+        <span class="compass-needle">↑</span>
+      </div>
+      <div class="map-hint">
+        <span>点击学校进入周边视图</span>
+        <span id="statusText">滚轮或右上角按钮可继续缩放</span>
+      </div>
+    </main>
+
+    <section class="category-panel hidden" id="categoryPanel" aria-label="分类餐厅面板">
+      <div class="panel-header">
+        <div>
+          <p class="panel-kicker">分类浏览</p>
+          <h2 id="categoryTitle">湘菜</h2>
+        </div>
+        <button class="panel-close" id="closeCategoryPanel" type="button" aria-label="关闭分类面板">×</button>
+      </div>
+      <div class="sort-tabs" id="sortTabs">
+        <button class="sort-tab active" data-sort="reviews" type="button">评价数最多</button>
+        <button class="sort-tab" data-sort="rating" type="button">评分最高</button>
+      </div>
+      <div class="panel-subline" id="categorySubline">按当前分类展示所有校园范围内的餐厅。</div>
+      <div class="category-list" id="categoryList"></div>
+    </section>
+
+    <section class="detail-sheet hidden" id="detailSheet" aria-label="店铺详情">
+      <div class="sheet-modal">
+        <div class="sheet-handle" id="sheetHandle"></div>
+        <div class="sheet-content" id="detailContent"></div>
+      </div>
+    </section>
+
+    <div class="toast hidden" id="toast"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
