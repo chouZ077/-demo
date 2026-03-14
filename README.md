@@ -2,6 +2,9 @@
 
 一个可直接打开运行的静态 Web App Demo，用地图方式查看高校周边餐饮店。
 
+在线演示：
+https://chouz077.github.io/-demo/
+
 ## 怎么打开
 
 直接打开 `index.html` 即可，不需要安装任何依赖。
