@@ -570,9 +570,8 @@ function renderCategoryRail() {
     button.style.setProperty("--cat-accent", categoryColor(category));
     button.innerHTML = `<span class="category-dot"></span><span>${category}</span>`;
     button.addEventListener("click", () => {
-      state.activeCategory = category;
-      renderCategoryRail();
-      renderCategoryPanel();
+      state.activeCategory = state.activeCategory === category ? null : category;
+      renderAll();
     });
     categoryRail.appendChild(button);
   });
@@ -638,16 +637,28 @@ function renderShops() {
   shopLayer.innerHTML = "";
 
   const showLabels = state.zoomLevel >= 3;
+  const hasCategoryFocus = Boolean(state.activeCategory);
 
   RESTAURANTS.filter((shop) => {
-    if (state.zoomLevel === 1) {
+    if (state.zoomLevel === 1 && !hasCategoryFocus) {
       return false;
     }
-    return !state.selectedUniId || shop.uniId === state.selectedUniId;
+    if (state.selectedUniId && shop.uniId !== state.selectedUniId) {
+      return false;
+    }
+    if (hasCategoryFocus && state.zoomLevel === 1) {
+      return shop.category === state.activeCategory;
+    }
+    return true;
   }).forEach((shop, index) => {
+    const isCategoryMatch = hasCategoryFocus && shop.category === state.activeCategory;
     const marker = document.createElement("button");
     marker.type = "button";
-    marker.className = showLabels ? "shop-marker shop-labeled" : "shop-marker";
+    marker.className = [
+      "shop-marker",
+      showLabels ? "shop-labeled" : "",
+      hasCategoryFocus ? (isCategoryMatch ? "is-category-match" : "is-category-dimmed") : ""
+    ].filter(Boolean).join(" ");
     marker.style.left = `${shop.x}%`;
     marker.style.top = `${shop.y}%`;
     if (!showLabels) {
@@ -1031,13 +1042,11 @@ zoomOutButton.addEventListener("click", () => {
 backButton.addEventListener("click", () => {
   state.activeCategory = null;
   setZoomLevel(1);
-  renderCategoryRail();
 });
 
 closeCategoryPanel.addEventListener("click", () => {
   state.activeCategory = null;
-  renderCategoryRail();
-  renderCategoryPanel();
+  renderAll();
 });
 
 sortTabs.addEventListener("click", (event) => {
