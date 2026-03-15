@@ -64,7 +64,7 @@ button {
 
 .top-search {
   position: absolute;
-  top: 24px;
+  top: 36px;
   left: 50%;
   z-index: 60;
   width: min(100%, 560px);
@@ -207,7 +207,7 @@ button {
 }
 
 .service-rail {
-  right: 22px;
+  right: 46px;
 }
 
 .category-button,
@@ -274,8 +274,8 @@ button {
 .service-button {
   display: grid;
   place-items: center;
-  width: 64px;
-  height: 64px;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
   color: #374151;
   background:
@@ -297,14 +297,14 @@ button {
 }
 
 .service-glyph {
-  font-size: 1.36rem;
+  font-size: 1.6rem;
 }
 
 .service-label {
   display: block;
-  margin-top: 8px;
+  margin-top: 10px;
   color: #6b7280;
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -1146,7 +1146,7 @@ button {
   }
 
   .top-search {
-    top: 16px;
+    top: 26px;
     width: 100%;
     padding: 0 14px;
   }
@@ -1182,7 +1182,7 @@ button {
 
   .service-rail {
     top: auto;
-    right: 14px;
+    right: 22px;
     bottom: 24px;
     transform: none;
     flex-direction: row;
@@ -1190,8 +1190,8 @@ button {
   }
 
   .service-button {
-    width: 56px;
-    height: 56px;
+    width: 62px;
+    height: 62px;
   }
 
   .service-label {
@@ -1237,7 +1237,7 @@ button {
 
 @media (max-width: 560px) {
   .top-search {
-    top: 12px;
+    top: 20px;
   }
 
   .search-box input {

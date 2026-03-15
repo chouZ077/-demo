@@ -460,7 +460,7 @@ function renderSchools() {
 function renderShops() {
   shopLayer.innerHTML = "";
 
-  const showLabels = state.zoomLevel >= 2;
+  const showLabels = state.zoomLevel >= 3;
 
   RESTAURANTS.filter((shop) => {
     if (state.zoomLevel === 1) {
