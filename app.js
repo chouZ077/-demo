@@ -427,6 +427,7 @@ function renderSchools() {
   UNIVERSITIES.forEach((uni, index) => {
     const marker = document.createElement("div");
     marker.className = "school-marker";
+    marker.dataset.uniId = String(uni.id);
     marker.style.left = `${uni.x}%`;
     marker.style.top = `${uni.y}%`;
     marker.style.animationDelay = `${index * 120}ms`;
@@ -447,10 +448,6 @@ function renderSchools() {
       </span>
       <span class="school-stem"></span>
     `;
-    button.addEventListener("click", (event) => {
-      event.stopPropagation();
-      focusUniversity(uni.id);
-    });
 
     marker.appendChild(button);
     schoolLayer.appendChild(marker);
@@ -837,7 +834,8 @@ document.addEventListener("click", (event) => {
 
 zoomInButton.addEventListener("click", () => {
   if (state.zoomLevel === 1 && !state.selectedUniId) {
-    state.selectedUniId = UNIVERSITIES[0].id;
+    showToast("请先点击一所高校，再进入周边视图。");
+    return;
   }
   setZoomLevel(state.zoomLevel + 1);
 });
@@ -907,6 +905,17 @@ mapStage.addEventListener("wheel", (event) => {
 }, { passive: false });
 
 mapStage.addEventListener("pointerdown", handlePointerDown);
+schoolLayer.addEventListener("click", (event) => {
+  const marker = event.target.closest(".school-marker");
+  if (!marker) {
+    return;
+  }
+  event.stopPropagation();
+  const uniId = Number(marker.dataset.uniId);
+  if (uniId) {
+    focusUniversity(uniId);
+  }
+});
 window.addEventListener("pointermove", handlePointerMove);
 window.addEventListener("pointerup", handlePointerUp);
 window.addEventListener("pointercancel", handlePointerUp);
