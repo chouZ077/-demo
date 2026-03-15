@@ -66,6 +66,66 @@ const RESTAURANTS = [
     baseVotes: { rec: 210, unrec: 21 }
   },
   {
+    id: 104,
+    uniId: 1,
+    name: "烤匠小站",
+    type: "烧烤店",
+    category: "烧烤",
+    emoji: "🍢",
+    x: 23,
+    y: 45,
+    rating: 4.3,
+    reviews: 510,
+    meituan: 4.4,
+    dianping: 4.2,
+    location: "A 校区西门夜宵街",
+    reviewSnippets: [
+      { platform: "美团", stars: 4, text: "烤鸡皮和年糕很受欢迎，晚上人多但出餐还算快" },
+      { platform: "大众点评", stars: 4, text: "适合夜宵，味道偏重口，和同学一起吃氛围很好" }
+    ],
+    baseVotes: { rec: 244, unrec: 20 }
+  },
+  {
+    id: 105,
+    uniId: 1,
+    name: "清禾轻食碗",
+    type: "轻食店",
+    category: "轻食",
+    emoji: "🥗",
+    x: 38,
+    y: 47,
+    rating: 4.2,
+    reviews: 302,
+    meituan: 4.2,
+    dianping: 4.3,
+    location: "A 校区体育馆对面",
+    reviewSnippets: [
+      { platform: "美团", stars: 4, text: "鸡胸肉和藜麦搭配很清爽，健身的人会比较喜欢" },
+      { platform: "大众点评", stars: 4, text: "分量不算特别大，但整体比较健康，午餐很合适" }
+    ],
+    baseVotes: { rec: 166, unrec: 14 }
+  },
+  {
+    id: 106,
+    uniId: 1,
+    name: "山野甜品铺",
+    type: "甜品店",
+    category: "甜品",
+    emoji: "🍰",
+    x: 35,
+    y: 33,
+    rating: 4.4,
+    reviews: 388,
+    meituan: 4.5,
+    dianping: 4.3,
+    location: "A 校区北侧生活广场",
+    reviewSnippets: [
+      { platform: "美团", stars: 4, text: "杨枝甘露和奶冻很稳，适合饭后来一份甜口收尾" },
+      { platform: "大众点评", stars: 4, text: "店面不大但干净，打包盒也比较精致，出片不错" }
+    ],
+    baseVotes: { rec: 193, unrec: 17 }
+  },
+  {
     id: 201,
     uniId: 2,
     name: "川流不息",
@@ -126,6 +186,66 @@ const RESTAURANTS = [
     baseVotes: { rec: 230, unrec: 27 }
   },
   {
+    id: 204,
+    uniId: 2,
+    name: "沸点小火锅",
+    type: "火锅店",
+    category: "火锅",
+    emoji: "🍲",
+    x: 66,
+    y: 52,
+    rating: 4.5,
+    reviews: 742,
+    meituan: 4.5,
+    dianping: 4.6,
+    location: "B 校区东侧下沉广场",
+    reviewSnippets: [
+      { platform: "美团", stars: 5, text: "双人锅套餐很划算，宿舍聚餐时经常会选这家" },
+      { platform: "大众点评", stars: 4, text: "底料偏香不算太辣，牛肉卷和豆皮评价比较高" }
+    ],
+    baseVotes: { rec: 341, unrec: 29 }
+  },
+  {
+    id: 205,
+    uniId: 2,
+    name: "港味小食堂",
+    type: "饭店",
+    category: "粤菜",
+    emoji: "🍚",
+    x: 51,
+    y: 53,
+    rating: 4.3,
+    reviews: 438,
+    meituan: 4.4,
+    dianping: 4.2,
+    location: "B 校区南门公交站旁",
+    reviewSnippets: [
+      { platform: "美团", stars: 4, text: "叉烧饭和冻柠茶是常点组合，整体比较稳不踩雷" },
+      { platform: "大众点评", stars: 4, text: "价格对学生友好，晚高峰等位时间会稍微久一点" }
+    ],
+    baseVotes: { rec: 208, unrec: 18 }
+  },
+  {
+    id: 206,
+    uniId: 2,
+    name: "三分甜研究所",
+    type: "甜品店",
+    category: "甜品",
+    emoji: "🍮",
+    x: 57,
+    y: 40,
+    rating: 4.2,
+    reviews: 315,
+    meituan: 4.3,
+    dianping: 4.1,
+    location: "B 校区北门文创街",
+    reviewSnippets: [
+      { platform: "美团", stars: 4, text: "焦糖布丁很受欢迎，奶味比较足，适合下午茶时间" },
+      { platform: "大众点评", stars: 4, text: "环境偏安静，适合买完甜品坐一会儿或者聊天" }
+    ],
+    baseVotes: { rec: 174, unrec: 16 }
+  },
+  {
     id: 301,
     uniId: 3,
     name: "岭南味道",
@@ -184,6 +304,66 @@ const RESTAURANTS = [
       { platform: "大众点评", stars: 4, text: "下午茶套餐比正餐更划算，甜点出片效果不错" }
     ],
     baseVotes: { rec: 172, unrec: 24 }
+  },
+  {
+    id: 304,
+    uniId: 3,
+    name: "火炙食堂",
+    type: "烧烤店",
+    category: "烧烤",
+    emoji: "🔥",
+    x: 79,
+    y: 38,
+    rating: 4.3,
+    reviews: 474,
+    meituan: 4.4,
+    dianping: 4.2,
+    location: "C 校区东门宵夜档口区",
+    reviewSnippets: [
+      { platform: "美团", stars: 4, text: "鸡翅和土豆片很受欢迎，适合晚上和朋友一起聚" },
+      { platform: "大众点评", stars: 4, text: "排烟还可以，味道偏香辣，夜里氛围感很强" }
+    ],
+    baseVotes: { rec: 222, unrec: 19 }
+  },
+  {
+    id: 305,
+    uniId: 3,
+    name: "小满轻食站",
+    type: "轻食店",
+    category: "轻食",
+    emoji: "🥙",
+    x: 68,
+    y: 27,
+    rating: 4.1,
+    reviews: 268,
+    meituan: 4.2,
+    dianping: 4.1,
+    location: "C 校区北区教学楼旁",
+    reviewSnippets: [
+      { platform: "美团", stars: 4, text: "卷饼和沙拉搭配不错，适合上课间隙快速解决午餐" },
+      { platform: "大众点评", stars: 4, text: "口味偏清爽，包装比较方便带走，女生会更喜欢" }
+    ],
+    baseVotes: { rec: 151, unrec: 13 }
+  },
+  {
+    id: 306,
+    uniId: 3,
+    name: "桃桃甜点屋",
+    type: "甜品店",
+    category: "甜品",
+    emoji: "🧁",
+    x: 70,
+    y: 41,
+    rating: 4.5,
+    reviews: 334,
+    meituan: 4.5,
+    dianping: 4.4,
+    location: "C 校区剧场侧街",
+    reviewSnippets: [
+      { platform: "美团", stars: 5, text: "桃子奶油卷和泡芙很有人气，下午常常卖得很快" },
+      { platform: "大众点评", stars: 4, text: "甜度不会太夸张，环境偏可爱风，适合拍照打卡" }
+    ],
+    baseVotes: { rec: 189, unrec: 12 }
   }
 ];
 
