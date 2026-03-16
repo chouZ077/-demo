@@ -5,9 +5,7 @@
 在线演示：
 https://chouz077.github.io/-demo/
 
-## 怎么打开
 
-直接打开 `index.html` 即可，不需要安装任何依赖。
 
 ## 怎么使用
 
