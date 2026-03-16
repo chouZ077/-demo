@@ -368,6 +368,20 @@ const RESTAURANTS = [
 ];
 
 const CATEGORIES = ["湘菜", "川菜", "粤菜", "日料", "韩餐", "西餐", "奶茶", "水果", "烧烤", "火锅", "轻食", "甜品"];
+const CATEGORY_META = [
+  { icon: "\uD83C\uDF36\uFE0F", accent: "#ff7a45" },
+  { icon: "\uD83D\uDD25", accent: "#ef4444" },
+  { icon: "\uD83E\uDD5F", accent: "#f59e0b" },
+  { icon: "\uD83C\uDF63", accent: "#8b5cf6" },
+  { icon: "\uD83C\uDF5C", accent: "#ec4899" },
+  { icon: "\uD83C\uDF7D\uFE0F", accent: "#3b82f6" },
+  { icon: "\uD83E\uDDCB", accent: "#14b8a6" },
+  { icon: "\uD83C\uDF4E", accent: "#22c55e" },
+  { icon: "\uD83C\uDF62", accent: "#f97316" },
+  { icon: "\uD83C\uDF72", accent: "#dc2626" },
+  { icon: "\uD83E\uDD57", accent: "#10b981" },
+  { icon: "\uD83C\uDF70", accent: "#fb7185" }
+];
 const SERVICES = [
   { label: "美团直播", glyph: "📺" },
   { label: "美团酒店", glyph: "🏨" },
@@ -504,24 +518,8 @@ function focusUniversity(uniId) {
 }
 
 function categoryColor(category) {
-  switch (category) {
-    case "湘菜":
-      return "#ff7a45";
-    case "川菜":
-      return "#ef4444";
-    case "粤菜":
-      return "#f59e0b";
-    case "日料":
-      return "#8b5cf6";
-    case "韩餐":
-      return "#ec4899";
-    case "西餐":
-      return "#3b82f6";
-    case "奶茶":
-      return "#14b8a6";
-    default:
-      return "#22c55e";
-  }
+  const index = CATEGORIES.indexOf(category);
+  return CATEGORY_META[index]?.accent ?? "#f59e0b";
 }
 
 function syncScene() {
@@ -563,12 +561,17 @@ function setZoomLevel(level) {
 function renderCategoryRail() {
   categoryRail.innerHTML = "";
   CATEGORIES.forEach((category, index) => {
+    const meta = CATEGORY_META[index] ?? { icon: "\uD83C\uDF74" };
     const button = document.createElement("button");
     button.type = "button";
     button.className = `category-button${state.activeCategory === category ? " active" : ""}`;
     button.style.animationDelay = `${index * 70}ms`;
-    button.style.setProperty("--cat-accent", categoryColor(category));
-    button.innerHTML = `<span class="category-dot"></span><span>${category}</span>`;
+    button.innerHTML = `
+      <span class="category-content">
+        <span class="category-icon" aria-hidden="true">${meta.icon}</span>
+        <span class="category-label">${category}</span>
+      </span>
+    `;
     button.addEventListener("click", () => {
       state.activeCategory = state.activeCategory === category ? null : category;
       renderAll();
