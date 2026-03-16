@@ -207,11 +207,11 @@ button {
 }
 
 .service-rail {
-  right: 46px;
+  right: 42px;
+  gap: 22px;
 }
 
 .category-button,
-.service-button,
 .zoom-card,
 .top-tools,
 .map-hint,
@@ -274,53 +274,64 @@ button {
 .service-button {
   display: grid;
   place-items: center;
-  width: 74px;
-  height: 74px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
-  color: #374151;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.32), transparent),
-    linear-gradient(145deg, #ffe39a 0%, #ffc84d 100%);
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.96);
   cursor: pointer;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 16px 26px rgba(255, 186, 59, 0.24);
-  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 16px 34px rgba(15, 23, 42, 0.14);
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
 .service-button:hover {
-  transform: translateY(-4px) scale(1.12);
+  transform: translateY(-3px) scale(1.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 22px 34px rgba(255, 186, 59, 0.32);
-  filter: saturate(1.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 20px 40px rgba(15, 23, 42, 0.18);
 }
 
-.service-glyph {
-  font-size: 1.6rem;
+.service-button:focus-visible {
+  outline: 3px solid rgba(255, 196, 0, 0.34);
+  outline-offset: 4px;
 }
 
-.service-label {
-  display: block;
-  margin-top: 10px;
-  color: #6b7280;
-  font-size: 0.88rem;
-  font-weight: 700;
-  line-height: 1.2;
-  text-align: center;
-  white-space: nowrap;
-  transition: color 180ms ease, transform 180ms ease;
+.service-button-inner {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background:
+    linear-gradient(180deg, #ffd42e 0%, #ffc400 100%);
+  color: #111827;
+  font-size: 1.42rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 249, 214, 0.76),
+    0 5px 10px rgba(255, 196, 0, 0.16);
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.service-button:hover .service-button-inner {
+  transform: scale(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 249, 214, 0.82),
+    0 8px 14px rgba(255, 196, 0, 0.2);
+}
+
+.service-text {
+  line-height: 1;
 }
 
 .service-wrap {
   position: relative;
   display: grid;
   justify-items: center;
-}
-
-.service-wrap:hover .service-label {
-  color: #b45309;
-  transform: translateY(1px);
 }
 
 .top-tools {
@@ -1222,12 +1233,14 @@ button {
   }
 
   .service-button {
-    width: 62px;
-    height: 62px;
+    width: 74px;
+    height: 74px;
   }
 
-  .service-label {
-    display: block;
+  .service-button-inner {
+    width: 52px;
+    height: 52px;
+    font-size: 1.08rem;
   }
 
   .map-hint {

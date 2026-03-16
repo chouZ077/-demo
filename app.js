@@ -582,21 +582,18 @@ function renderServiceRail() {
   SERVICES.forEach((service) => {
     const wrap = document.createElement("div");
     wrap.className = "service-wrap";
+    const shortLabel = service.label.slice(-2);
 
     const button = document.createElement("button");
     button.type = "button";
     button.className = "service-button";
-    button.innerHTML = `<span class="service-glyph">${service.glyph}</span>`;
+    button.setAttribute("aria-label", service.label);
+    button.innerHTML = `<span class="service-button-inner"><span class="service-text">${shortLabel}</span></span>`;
     button.addEventListener("click", () => {
       showToast(`${service.label} 入口已预留，当前 demo 暂未接入。`);
     });
 
-    const label = document.createElement("span");
-    label.className = "service-label";
-    label.textContent = service.label;
-
     wrap.appendChild(button);
-    wrap.appendChild(label);
     serviceRail.appendChild(wrap);
   });
 }
